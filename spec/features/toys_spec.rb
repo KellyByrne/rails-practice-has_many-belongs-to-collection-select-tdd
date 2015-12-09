@@ -15,4 +15,26 @@ feature 'toys' do
 		expect(page).to have_content(cat.name)
 	end
 
+	scenario "new should have a collection select for all Cats" do
+		cat1 = create_cat(name: "Awesomekitty")
+		cat2 = create_cat
+		cat3 = create_cat
+		cat4 = create_cat
+		visit new_toy_path
+		expect(page).to have_content("Awesomekitty")
+		expect(page).to have_content(cat2.name)
+		expect(page).to have_content(cat3.name)
+		expect(page).to have_content(cat4.name)
+	end
+
+	scenario "new should create new toy and cat ownership and list it on the index" do
+		cat = create_cat
+		visit new_toy_path
+		fill_in "Name", with: "Kitty Fishing Rod"
+		select cat.name, from: :toy_cat_id
+		click_on "Create Toy"
+		expect(page).to have_content("Kitty Fishing Rod")
+		expect(page).to have_content(cat.name)
+	end
+
 end

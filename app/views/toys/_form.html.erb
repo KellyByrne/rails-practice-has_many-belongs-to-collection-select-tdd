@@ -4,8 +4,12 @@
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control" %>
   </div>
-
-  <em>insert collection select for Cat</em>
+  <div class = "form-group">
+  <%= f.collection_select :cat_id, Cat.all, :id, :name, {prompt:"Select a cat!"}, {class:"form-control"} %>
+  <!-- name of whatever is being sent back from this part of the form will be the toy cat id -->
+  <!-- select from cats all of the cats, send back to controller is the cat id and the cat name is what people will see-->
+  <!-- f.collection_select takes 4-6 arguments -->
+  </div>
   <br>
   <br>
 
