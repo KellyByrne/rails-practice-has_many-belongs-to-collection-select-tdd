@@ -7,4 +7,12 @@ feature 'toys' do
 		visit toys_path
 		expect(page).to have_content(cat.name)
 	end
+
+	scenario "show should name the cat that owns that toy" do
+		cat = create_cat
+		toy = create_toy(cat)
+		visit toy_path(toy)
+		expect(page).to have_content(cat.name)
+	end
+
 end
